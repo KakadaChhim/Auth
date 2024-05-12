@@ -15,7 +15,10 @@ namespace Authentication.Configs
             var pageIndex = bindingContext.ValueProvider.GetValue("pageIndex").FirstValue;
             var pageSize = bindingContext.ValueProvider.GetValue("pageSize").FirstValue;
             var sorts = bindingContext.ValueProvider.GetValue("sorts").FirstValue;
-
+            if (string.IsNullOrEmpty(sorts))
+            {
+                sorts = "";
+            }
             var filters = string.IsNullOrEmpty(values) ? new List<Filter>() : JsonConvert.DeserializeObject<List<Filter>>(values);
 
             var result = new QueryParamModel

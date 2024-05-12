@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Authentication.Logic
 {
-    public class BranchLogic : ShareLogic
+    public class BranchLogic: ShareLogic
     {
         public BranchLogic(IServiceProvider provider) : base(provider)
         {

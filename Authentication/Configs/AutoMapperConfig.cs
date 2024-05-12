@@ -8,15 +8,15 @@ namespace Authentication.Configs
     {
         public AutoMapperConfig() 
         {
-            CreateMap<Branch, BranchListModel>();
-            CreateMap<Branch, BranchAddModel>();
-            CreateMap<Branch, BranchEditModel>();
-            CreateMap<Branch, BranchViewModel>();
+            CreateMap<Branch, BranchListModel>().ReverseMap();
+            CreateMap<Branch, BranchAddModel>().ReverseMap();
+            CreateMap<Branch, BranchEditModel>().ReverseMap();
+            CreateMap<Branch, BranchViewModel>().ReverseMap();
 
-            CreateMap<User, UserListModel>();
-            CreateMap<User, UserAddModel>();
-            CreateMap<User, UserEditModel>();
-            CreateMap<User, UserViewModel>();
+            CreateMap<User, UserListModel>().ReverseMap();
+            CreateMap<User, UserAddModel>().ReverseMap();
+            CreateMap<User, UserEditModel>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
         }
     }
 }

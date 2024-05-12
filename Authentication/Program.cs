@@ -1,3 +1,6 @@
+using Authentication.Configs;
+using Authentication.Extensions;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,13 +12,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// register 
+//Add Automapper
+var confg = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new AutoMapperConfig());
+});
+// register DbContext
 builder.Services.AddDbContext<Authentication.DbContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+var mapper = confg.CreateMapper();
+builder.Services.AddSingleton(mapper);
+// lower case url 
+builder.Services.AddRouting(option => option.LowercaseUrls = true);
+
+
+// Add logic service
+builder.AddLogics();
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

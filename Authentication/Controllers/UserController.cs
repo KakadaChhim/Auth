@@ -1,6 +1,5 @@
 ﻿using Authentication.Logic;
 using Authentication.Model;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Controllers
@@ -13,7 +12,7 @@ namespace Authentication.Controllers
         [HttpGet]
         public async Task<ShareModel.SearchResult<UserListModel, QueryParamModel>> SearchAsync([FromQuery] QueryParamModel param)
         {
-            return await _logic.SearchAsyns(param);
+            return await _logic.SearchAsync(param);
         }
         [HttpGet("{id}")]
         public async Task<UserViewModel> FindAsync(long id)

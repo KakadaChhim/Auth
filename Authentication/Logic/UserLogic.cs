@@ -1,4 +1,5 @@
 ﻿using Authentication.Domain;
+using Authentication.Extensions;
 using Authentication.Helper;
 using Authentication.Model;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +13,24 @@ namespace Authentication.Logic
         {
         }
 
-        public async Task<ShareModel.SearchResult<UserListModel, QueryParamModel>> SearchAsyns(QueryParamModel param)
+        public async Task<SearchResult<UserListModel, QueryParamModel>> SearchAsync(QueryParamModel param)
         {
-            var entity = _db.Users.Where(x => x.Active);
-            return new ShareModel.SearchResult<UserListModel, QueryParamModel>
+            var entities = _db.Users.Where(x => x.Active);
+            var search = param.GetSearchFilter().ToLower();
+            if (string.IsNullOrEmpty(param.Sorts))
             {
-                Results = _mapper.Map<List<UserListModel>>(await entity.ToListAsync()),
+                param.Sorts = nameof(User.Name);
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                entities = entities.Where(x => x.Name.ToLower().Contains(search));
+            }
+            await param.UpdateCountAsync(entities);
+            entities = entities.ToFilterView(param);
+            return new SearchResult<UserListModel, QueryParamModel>
+            {
+                Results = _mapper.Map<List<UserListModel>>(await entities.ToListAsync()),
                 Param = param
             };
         }
@@ -32,6 +45,8 @@ namespace Authentication.Logic
         public async Task<UserViewModel> AddAsync(UserAddModel model)
         {
             var entity = _mapper.Map<User>(model);
+            entity.PasswordHash = model.Password;
+            entity.PasswordSalt = model.Password;
             await _db.Users.AddAsync(entity);
             await _db.SaveChangesAsync();
             return await FindAsync(entity.Id);

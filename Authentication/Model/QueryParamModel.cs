@@ -28,6 +28,40 @@ namespace Authentication.Model
         public List<Filter> Filters { get; set; }
         public int PageCount { get; set; }
         public int RowCount { get; set; }
+        
+        public long GetManualFilterLong(string key)
+        {
+            try{
+                return long.Parse(GetManualFilter(key));
+            }
+            catch
+            {
+                return 0;
+            } 
+        }
+        
+        public string GetManualFilter(string key)
+        {
+            var value = "";
+            var filter = Filters.FirstOrDefault(x => x.Field.ToLower() == key.ToLower());
+            if (filter != null)
+            {
+                filter.Manual = true;
+                value = filter.Value;
+            }
+            return value;
+        }
+        public string GetSearchFilter()
+        {
+            var search = "";
+            var searchFilter = Filters.FirstOrDefault(x => x.Field.ToLower() == "search");
+            if (searchFilter != null)
+            {
+                search = searchFilter.Value;
+                searchFilter.Manual = true;
+            }
+            return search;
+        }
 
     }
     public class Filter

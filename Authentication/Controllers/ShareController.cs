@@ -14,9 +14,9 @@ namespace Authentication.Controllers
         public readonly IServiceProvider _provider;
         public ShareController(IServiceProvider provider)
         {
-            _db = provider.GetService<DbContext>();
-            _mapper = provider.GetService<IMapper>();
-            _logic = provider.GetService<TLogic>();
+            _db = provider.GetRequiredService<DbContext>();
+            _mapper = provider.GetRequiredService<IMapper>();
+            _logic = provider.GetRequiredService<TLogic>();
             _provider = provider;
         }
     }

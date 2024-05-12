@@ -9,9 +9,12 @@ namespace Authentication.Model
         public string PasswordSalt { get; set; }
         public string Email { get; set; }
     }
-    public class UserAddModel : UserModel
+    public class UserAddModel 
     {
-
+        public string Name { get; set; }
+        public string Phone { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
     }
     public class UserEditModel : UserModel
     {
