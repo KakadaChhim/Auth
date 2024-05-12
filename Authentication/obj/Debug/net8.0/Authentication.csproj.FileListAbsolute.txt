@@ -236,3 +236,16 @@ D:\Learning\ASP.Net Core\Auth\Authentication\obj\Debug\net8.0\Authentication.pdb
 D:\Learning\ASP.Net Core\Auth\Authentication\obj\Debug\net8.0\Authentication.genruntimeconfig.cache
 D:\Learning\ASP.Net Core\Auth\Authentication\obj\Debug\net8.0\ref\Authentication.dll
 D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\System.Linq.Dynamic.Core.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Learning\ASP.Net Core\Auth\Authentication\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

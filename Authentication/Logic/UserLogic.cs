@@ -19,12 +19,12 @@ namespace Authentication.Logic
             var search = param.GetSearchFilter().ToLower();
             if (string.IsNullOrEmpty(param.Sorts))
             {
-                param.Sorts = nameof(User.Name);
+                param.Sorts = nameof(User.Username);
             }
 
             if (!string.IsNullOrEmpty(search))
             {
-                entities = entities.Where(x => x.Name.ToLower().Contains(search));
+                entities = entities.Where(x => x.Username.ToLower().Contains(search));
             }
             await param.UpdateCountAsync(entities);
             entities = entities.ToFilterView(param);
@@ -45,13 +45,21 @@ namespace Authentication.Logic
         public async Task<UserViewModel> AddAsync(UserAddModel model)
         {
             var entity = _mapper.Map<User>(model);
-            entity.PasswordHash = model.Password;
-            entity.PasswordSalt = model.Password;
+            CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            entity.PasswordHash = passwordHash;
+            entity.PasswordSalt = passwordSalt;
             await _db.Users.AddAsync(entity);
             await _db.SaveChangesAsync();
             return await FindAsync(entity.Id);
         }
-
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
         public async Task<UserViewModel> RemoveAsync(RemoveModel model)
         {
             var entity = await _db.Users.FirstOrDefaultAsync(x => x.Id == model.Id);

@@ -1,5 +1,6 @@
 ﻿using Authentication.Logic;
 using Authentication.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Controllers
@@ -9,6 +10,7 @@ namespace Authentication.Controllers
         public UserController(IServiceProvider provider) : base(provider)
         {
         }
+        [Authorize]
         [HttpGet]
         public async Task<ShareModel.SearchResult<UserListModel, QueryParamModel>> SearchAsync([FromQuery] QueryParamModel param)
         {
